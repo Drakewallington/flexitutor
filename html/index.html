@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" href="../css/main.css" />
+	<script type="text/javascript" src="../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../scripts/constants.js"></script>
+    <script type="text/javascript" src="../scripts/multiselect.js"></script>
+    <script type="text/javascript" src="../scripts/jwerty.js"></script>
+	<script type="text/javascript" src="../scripts/cards.js"></script>
+	<script type="text/javascript" src="../scripts/menu.js"></script>
+	<script type="text/javascript" src="../scripts/main.js"></script>
+    
+	<title>The EARGEAR Learning Framework</title>
+</head>
+<body>
+	<span class="invisible">INVISIBLE-INFORMATION</span>
+	<button id="helpButton">Help [F1]</button>
+	<div id="card_Options"> 
+		<button id="backToMenuBtn">Back to Menu [Escape]</button>
+		<h3 id="currentSubmenu"></h3>
+        <p class="currentProgress"></p>
+	</div>
+    <div class="clearer"></div>
+	<div id="menu_Options">
+		<input type="checkbox" id="enable-disable_Audio" checked="checked" />
+		<label for="enable-disable_Audio">Audio</label>
+        <input type="checkbox" id="enable-disable_AudioMode" />
+		<label for="enable-disable_AudioMode">Audio-Mode [Ctrl + A]</label>
+	</div>
+	<div id="cards-wrap">
+		<div class="items item_side" id="card_left">
+			<div class="element terms">
+				<div class="term-wrapper"></div>
+			</div>
+			<div class="element images">
+				<div class="image-wrapper"></div>
+			</div>
+			<div class="element translations">
+				<div class="translation-wrapper"></div>
+			</div>
+		</div>
+		<div class="items item_middle" id="card_middle">
+			<p class="delete_card">X</p>
+            <div class="element terms">
+				<div class="term-wrapper"></div>
+				<div id="answerFormTerm" class="answerForm">
+					<input type="text" name="answer" placeholder="Your answer" autofocus id="answerBoxTop" class="answerBox" />
+					<button id="answerButtonTop" type="button">Submit</button>
+                    <div class="feedbackSoundSymbol"></div>
+				</div>
+			</div>
+			<div class="element images">
+				<div class="image-wrapper"></div>
+			</div>
+			<div class="element translations">
+				<div class="translation-wrapper"></div>
+                <div id="answerFormTranslation" class="answerForm">
+					<input type="text" name="answer" placeholder="Your answer" autofocus id="answerBoxBottom" class="answerBox" />
+					<button id="answerButtonBottom" type="button">Submit</button>
+                    <div class="feedbackSoundSymbol"></div>
+				</div>
+			</div>
+		</div>
+		<div class="items item_side" id="card_right">
+			<div class="element terms">
+				<div class="term-wrapper"></div>
+			</div>
+			<div class="element images">
+				<div class="image-wrapper"></div>
+			</div>
+			<div class="element translations">
+				<div class="translation-wrapper"></div>
+			</div>
+		</div>
+	</div>
+	<section id="main_menu-wrap">
+        <h1>HEADER-INFORMATION</h1>
+		<ul class="menu_list"></ul>
+	</section>
+    
+    <div id="cardElements">
+        <h3>Card elements selected</h3>
+        <div id="whichCardElements" multiselect="multiselect" class="multiselect">
+            <section>
+                <h1>TOP (TOP-LANGUAGE)</h1>
+                <span>TEXT</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="textTop" type="radio" name="TOP-LANGUAGE" value="Text On" checked="checked" countaschecked="true" />
+                <label for="textTop">On</label><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="noneTop" type="radio" name="TOP-LANGUAGE" value="Text Off" countaschecked="false" />
+                <label for="noneTop">Off</label><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <input id="activeAnswerTop" type="radio" name="TOP-LANGUAGE" value="Answer-option Top" countaschecked="true" />
+                <label for="activeAnswerTop">Answer-box</label><br />
+                <label for="audioTop">AUDIO</label>
+                <input id="audioTop" type="checkbox" name="audioTop" value="Audio Top" checked="checked" />
+            </section>
+            <section>
+                <h1>MIDDLE</h1>
+                <label for="image">IMAGE</label>
+                <input id="image" type="checkbox" name="image" value="Image" checked="checked" /><br />
+            </section>
+            <section>
+                <h1>BOTTOM (BOTTOM-LANGUAGE)</h1>
+                <span class="subheadline">TEXT</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="textBottom" type="radio" name="BOTTOM-LANGUAGE" value="Text On" checked="checked" countaschecked="true" />
+                <label for="textBottom">On</label><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="noneBottom" type="radio" name="BOTTOM-LANGUAGE" value="Text Off" countaschecked="false" />
+                <label for="noneBottom">Off</label><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="activeAnswerBottom" type="radio" name="BOTTOM-LANGUAGE" value="Answer-option Term" countaschecked="true" />
+                <label for="activeAnswerBottom">Answer-box</label><br />
+                <label for="audioBottom">AUDIO</label>
+                <input id="audioBottom" type="checkbox" name="audioBottom" value="Audio Bottom" checked="checked" />
+            </section>
+            <section>
+                <h2>Audio Top2Bottom Speed</h2>
+                <input type="range" id="betweenAudioSpeed" name="betweenAudioSpeed" min="1" max="4" step="1" value="2" onchange="cardsSingletonClass().updateTextInput(this, this.value);" />
+                <input type="text" disabled="disabled" value="2" maxlength="1" id="betweenAudioSpeedOutput" class="outputValue" />
+            </section>
+		</div>
+    </div>
+    <div id="settingsBox">
+        <h3>Cardstack Speed</h3>
+        <input type="range" id="autoplaySpeed" name="autoplaySpeed" min="0" max="4" step="1" value="0" onchange="cardsSingletonClass().updateTextInput(this, this.value);" />
+        <input type="text" disabled="disabled" value="Off" maxlength="1" id="speedOutput" class="outputValue" />
+    </div>
+    <button id="randomizeCards">Randomize Cards</button>
+    
+	<div class="clearer"></div>
+    
+	<div id="shortcutWindow" class="invisible">
+		<h1>F1 HELP (T = Toggle)</h1>
+		<table>
+			<tbody>
+				<tr>
+					<th>Ctrl + key</th>
+					<th>Action</th>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio or Visual Mode</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio Sitemap</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Advanced User Tips</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Delete the Card</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;# Cards To Go</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>z (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Card Feed on/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Card Feed Slower</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Card Feed Faster</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio Top Repeat</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio Bottom Repeat</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>f (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio Top on/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>g (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio Bottom on/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;AudioPlay Up-Dn Slower</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;AudioPlay Up-Dn Faster</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>v (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Text Top on/answer/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>b (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Text Bottom on/answer/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>y (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Audio Feedback on/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>i (T)</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Images on/off</td>
+				</tr>
+				<tr>
+					<td class="align-center">+<strong>r&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;Cards Randomized</td>
+				</tr>
+			</tbody>
+		</table>
+		<button id="closeHelpWindow">Close</button>
+	</div>
+	<div id="hiddenPlayer"></div>
+</body>
+</html>
